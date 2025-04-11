@@ -15,7 +15,18 @@ export function CheckoutForm() {
 
   return (
     <form>
-      <ExpressCheckoutElement onConfirm={handleConfirmExpressCheckout} />
+      <ExpressCheckoutElement
+        onConfirm={handleConfirmExpressCheckout}
+        options={{
+          shippingRates: [
+            {
+              id: "shr_XXXXXX",
+              amount: 1,
+              displayName: "Test Product Shipping",
+            },
+          ],
+        }}
+      />
       <PaymentElement />
       <button>Submit</button>
     </form>

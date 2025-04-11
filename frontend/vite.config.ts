@@ -21,5 +21,5 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
-  server: {allowedHosts: ["ac09-192-80-173-215.ngrok-free.app"]},
+  server: {allowedHosts: ["0477-192-80-173-215.ngrok-free.app"]},
 });
