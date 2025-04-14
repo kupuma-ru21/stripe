@@ -1,4 +1,5 @@
 import {
+  AddressElement,
   ExpressCheckoutElement,
   PaymentElement,
   useCheckout,
@@ -7,26 +8,27 @@ import {StripeExpressCheckoutElementConfirmEvent} from "@stripe/stripe-js";
 
 export function CheckoutForm() {
   const checkout = useCheckout();
+
   const handleConfirmExpressCheckout = (
     event: StripeExpressCheckoutElementConfirmEvent
   ) => {
     checkout.confirm({expressCheckoutConfirmEvent: event});
   };
 
+  const handleExpressCheckout = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await checkout.confirm();
+    } catch (error) {
+      window.alert("Error: " + error);
+      console.error(error);
+    }
+  };
+
   return (
-    <form>
-      <ExpressCheckoutElement
-        onConfirm={handleConfirmExpressCheckout}
-        options={{
-          shippingRates: [
-            {
-              id: "shr_XXXXXX",
-              amount: 1,
-              displayName: "Test Product Shipping",
-            },
-          ],
-        }}
-      />
+    <form onSubmit={handleExpressCheckout}>
+      <ExpressCheckoutElement onConfirm={handleConfirmExpressCheckout} />
+      <AddressElement options={{mode: "billing"}} />
       <PaymentElement />
       <button>Submit</button>
     </form>

@@ -6,12 +6,14 @@ import {CheckoutProvider} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 import {CheckoutForm} from "~/components/checkoutForm";
 
-const stripePromise = loadStripe("pk_test_XXXXXXX");
+const stripePromise = loadStripe(
+  "pk_test_XXXXXX"
+);
 
 export default function Index() {
   const fetchClientSecret = async () => {
     return fetch(
-      "https://0133-192-80-173-215.ngrok-free.app/create-checkout-session",
+      "https://13a8-192-80-173-215.ngrok-free.app/create-checkout-session",
       {method: "POST"}
     )
       .then((response) => response.json())
